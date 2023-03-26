@@ -1,0 +1,44 @@
+#!/bin/sh
+# if we don't have GCC we are most probably on a new system
+{{ if not (lookPath "gcc") }}
+sudo apt update -y
+sudo apt install -y make build-essential libssl-dev zlib1g-dev \
+  libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
+  libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev \
+  git emacs python3 bash-completion
+{{ end }}
+
+{{ if not (lookPath "exa") }}
+  sudo apt install -y exa
+{{ end }}
+
+{{ if not (lookPath "pyenv") }}
+  curl https://pyenv.run | bash
+{{ end }}
+
+{{ if not (lookPath "pipx") }}
+  sudo apt install -y pipx
+{{ end }}
+
+{{ if not (lookPath "rg") }}
+  sudo apt install -y ripgrep
+{{ end }}
+
+{{ if not (lookPath "zoxide") }}
+  sudo apt install -y zoxide
+{{ end }}
+
+# Temporary while we migrate from yadm to chezmoi
+{{ if not (lookPath "yadm") }}
+  sudo apt install -y yadm
+{{ end }}
+# {{ if not (stat (joinPath .chezmoi.homeDir ".config/yadm")) }}
+#   yadm clone
+# {{ else }}
+#   echo ".config/yadm exists"
+# {{ end }}
+
+{{ if not (stat (joinPath .chezmoi.homeDir "bin")) }}
+  mkdir {{ joinPath .chezmoi.homeDir "bin" }}
+{{ end }}
+
