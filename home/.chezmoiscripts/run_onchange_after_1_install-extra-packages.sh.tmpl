@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# install chezmoi automcomplete into $HOME/.bash/completion-scripts
+
+chezmoi completion bash > $HOME/.bash/completion-scripts/chezmoi.bash-completion
+
 {{ if not (lookPath "pyenv") }}
   curl https://pyenv.run | bash
 {{ end }}
@@ -10,4 +14,7 @@
 
 {{ if not (lookPath "poetry") }}
   pipx install poetry
+  poetry completions bash >> $HOME/.bash/completion-scripts/poetry.bash-completion
 {{ end }}
+
+# TODO: install Atlas CLI (or put it into installer scipts)

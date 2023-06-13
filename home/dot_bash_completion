@@ -1,0 +1,24 @@
+#!/bin/bash
+source $HOME/.bash/complete-alias/complete_alias
+
+alias d=docker
+alias dc="docker compose"
+alias dco=docker\ container
+alias g=git
+
+complete -F _complete_alias d
+complete -F _complete_alias dc
+complete -F _complete_alias dco
+complete -F _complete_alias g
+
+COMPLETION_DIR="$HOME/.bash/completion-scripts"
+
+# Iterate over all files ending with .bash-completion in $HOME/.bash/completion-scripts and sources them.
+if [ -d "$COMPLETION_DIR" ]; then
+  for file in "$COMPLETION_DIR"/*.bash-completion; do
+    source "$file"
+  done
+fi
+
+alias p=poetry
+complete -F _complete_alias p
