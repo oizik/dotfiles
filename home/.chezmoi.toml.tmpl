@@ -1,0 +1,13 @@
+{{- $email := "gary@jarrel.com.au" -}}
+
+{{- $hostname := .chezmoi.hostname -}}
+
+{{- $personal := false -}}
+{{- if contains "noodle" $hostname -}}
+{{-   $personal = true -}}
+{{- end -}}
+
+[data]
+    email = {{ $email | quote }}
+    hostname = {{ $hostname | quote }}
+    personal = {{ $personal }}

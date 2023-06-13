@@ -1,0 +1,13 @@
+#!/bin/sh
+
+{{ if not (lookPath "pyenv") }}
+  curl https://pyenv.run | bash
+{{ end }}
+
+{{ if not (lookPath "pipx") }}
+  sudo apt install -y pipx
+{{ end }}
+
+{{ if not (lookPath "poetry") }}
+  pipx install poetry
+{{ end }}
